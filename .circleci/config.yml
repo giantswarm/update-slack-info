@@ -9,7 +9,6 @@ workflows:
       - architect/go-build:
           name: go-build
           binary: update-slack-info
-          resource_class: xlarge
           filters:
             tags:
               only: /^v.*/
