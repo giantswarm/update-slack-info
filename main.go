@@ -24,6 +24,7 @@ type UserGroups struct {
 }
 
 func main() {
+	filepath := os.Args[1]
 	userCache = map[string]string{}
 
 	slackToken := os.Getenv(EnvSlackToken)
@@ -32,7 +33,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	yamlFile, err := ioutil.ReadFile("fixtures/sample.yaml")
+	yamlFile, err := ioutil.ReadFile(filepath)
 	if err != nil {
 		fmt.Printf("Error opening the file: #%v ", err)
 	}

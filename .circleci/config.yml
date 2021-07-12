@@ -6,6 +6,14 @@ orbs:
 workflows:
   build:
     jobs:
+      - architect/go-build:
+          name: go-build
+          binary: update-slack-info
+          resource_class: xlarge
+          filters:
+            tags:
+              only: /^v.*/
+
       - architect/push-to-docker:
           name: push-update-slack-info-to-quay
           image: "quay.io/giantswarm/update-slack-info"
