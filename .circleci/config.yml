@@ -20,6 +20,8 @@ workflows:
           context: architect
           username_envar: "QUAY_USERNAME"
           password_envar: "QUAY_PASSWORD"
+          requires:
+            - go-build
           # Needed to trigger job also on git tag.
           filters:
             tags:
