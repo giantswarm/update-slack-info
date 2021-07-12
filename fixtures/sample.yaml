@@ -1,0 +1,9 @@
+groups:
+  - name: group1
+    members:
+    - fernando@giantswarm.io
+    - pau@giantswarm.io
+  - name: group2
+    members:
+    - tobiasz@giantswarm.io
+    - pau@giantswarm.io

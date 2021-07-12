@@ -1,30 +1,29 @@
-[![CircleCI](https://circleci.com/gh/giantswarm/template.svg?style=shield)](https://circleci.com/gh/giantswarm/template)
+# Update Slack Info - GitHub Action
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
-# REPOSITORY_NAME
 
-This is a template repository containing some basic files every repository
-needs.
+A [GitHub Action](https://github.com/features/actions) to update the Slack Information.
 
-To use it just hit `Use this template` button or [this link][generate].
+## Usage
 
-Things to do with your newly created repo:
+You can use this action after any other action. Here is an example setup of this action:
 
-1. Run`devctl replace -i "REPOSITORY_NAME" "$(basename $(git rev-parse
-   --show-toplevel))" --ignore '.git/**' '**'`.
-2. Run `devctl replace -i "template" "$(basename $(git rev-parse
-   --show-toplevel))" --ignore '.git/**' '**'`.
-3. Go to https://github.com/giantswarm/REPOSITORY_NAME/settings and make sure `Allow
-   merge commits` box is unchecked and `Automatically delete head branches` box
-   is checked.
-4. Go to https://github.com/giantswarm/REPOSITORY_NAME/settings/access and add
-   `giantswarm/bots` with `Write` access and `giantswarm/employees` with
-   `Admin` access.
-5. Add this repository to https://github.com/giantswarm/github.
-6. Create quay.io docker repository if needed.
-7. Add the project to the CircleCI:
-   https://circleci.com/setup-project/gh/giantswarm/REPOSITORY_NAME
-8. Change the badge (with style=shield):
-   https://circleci.com/gh/giantswarm/REPOSITORY_NAME.svg?style=shield&circle-token=TOKEN_FOR_PRIVATE_REPO
-   If this is a private repository token with scope `status` will be needed.
+1. Create a `.github/workflows/update-slack-info.yml` file in your GitHub repo.
+2. Add the following code to the `update-slack-info.yml` file.
 
-[generate]: https://github.com/giantswarm/template/generate
+```yml
+on: push
+name: Update Slack Info Demo
+jobs:
+  slackNotification:
+    name: Update Slack Info
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Update Slack Info
+      uses: giantswarm/update-slack-info@v2
+      env:
+        SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
+```
+
+3. Create `SLACK_TOKEN` secret using [GitHub Action's Secret](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets-for-a-repository). You can [generate a Slack token from here](https://slack.com/intl/en-gb/help/articles/215770388-Create-and-regenerate-API-tokens).

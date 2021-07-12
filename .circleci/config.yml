@@ -1,14 +1,18 @@
 version: 2.1
 
 orbs:
-  architect: giantswarm/architect@2.8.0
+  architect: giantswarm/architect@3.2.0
 
 workflows:
-  test:
+  build:
     jobs:
-      - architect/go-test:
-          name: go-test
+      - architect/push-to-docker:
+          name: push-update-slack-info-to-quay
+          image: "quay.io/giantswarm/update-slack-info"
+          context: architect
+          username_envar: "QUAY_USERNAME"
+          password_envar: "QUAY_PASSWORD"
+          # Needed to trigger job also on git tag.
           filters:
-            # Trigger job also on git tag.
             tags:
               only: /^v.*/
