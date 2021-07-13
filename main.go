@@ -12,6 +12,7 @@ import (
 
 const (
 	EnvSlackToken = "SLACK_TOKEN"
+	EnvFilepath   = "INPUT_FILEPATH"
 )
 
 var userCache map[string]string
@@ -24,8 +25,13 @@ type UserGroups struct {
 }
 
 func main() {
-	filepath := os.Args[1]
 	userCache = map[string]string{}
+
+	filepath := os.Getenv(EnvFilepath)
+	if filepath == "" {
+		fmt.Fprintln(os.Stderr, "File path is required as first argument")
+		os.Exit(1)
+	}
 
 	slackToken := os.Getenv(EnvSlackToken)
 	if slackToken == "" {
@@ -83,6 +89,8 @@ func main() {
 			return
 		}
 	}
+
+	fmt.Println(`::set-output name=output::"Slack has been updated successfully"`)
 }
 
 func getListUserIDs(api *slack.Client, userList []string) []string {

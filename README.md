@@ -22,6 +22,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: Update Slack Info
       uses: giantswarm/update-slack-info@v2
+      with:
+        filepath: './squads.yaml'
       env:
         SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
 ```

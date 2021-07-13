@@ -4,6 +4,13 @@ author: 'pipo02mix'
 runs:
   using: 'docker'
   image: 'docker://quay.io/giantswarm/update-slack-info:v1.0.0'
+  args:
+    - ${{ inputs.filepath }}
 branding:
   icon: 'bell'
   color: 'yellow'
+inputs:
+  filepath:
+    description: 'Filepath to apply'
+    required: false
+    default: './squads.yaml'
