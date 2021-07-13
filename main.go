@@ -29,7 +29,7 @@ func main() {
 
 	filepath := os.Getenv(EnvFilepath)
 	if filepath == "" {
-		fmt.Fprintln(os.Stderr, "File path is required as first argument")
+		fmt.Fprintln(os.Stderr, "File path is required")
 		os.Exit(1)
 	}
 

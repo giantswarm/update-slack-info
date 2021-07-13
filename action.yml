@@ -3,7 +3,7 @@ description: 'This action will update Slack Information like groups or users'
 author: 'pipo02mix'
 runs:
   using: 'docker'
-  image: 'docker://quay.io/giantswarm/update-slack-info:v1.0.0'
+  image: 'docker://quay.io/giantswarm/update-slack-info:1.0.0'
   args:
     - ${{ inputs.filepath }}
 branding:
