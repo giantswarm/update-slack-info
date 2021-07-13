@@ -71,8 +71,8 @@ func main() {
 
 		if slackGroupId == "" {
 			ug := slack.UserGroup{
-				Name:   "App Squad " + group.Name,
-				Handle: group.Name,
+				Name:   "App Squad " + strings.Title(strings.ToLower(group.Name)),
+				Handle: strings.ToLower(group.Name),
 			}
 			ugr, err := api.CreateUserGroup(ug)
 			if err != nil {
