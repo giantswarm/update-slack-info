@@ -28,4 +28,4 @@ jobs:
         SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}
 ```
 
-3. Create `SLACK_TOKEN` secret using [GitHub Action's Secret](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets-for-a-repository). You can [generate a Slack token from here](https://slack.com/intl/en-gb/help/articles/215770388-Create-and-regenerate-API-tokens).
+3. Create `SLACK_TOKEN` secret using [GitHub Action's Secret](https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets#creating-encrypted-secrets-for-a-repository). You can [generate a Slack token from here](https://slack.com/intl/en-gb/help/articles/215770388-Create-and-regenerate-API-tokens). Taking into account it needs these scopes `usergroups:read`, `usergroups:write`, `users:read` and `users:read.email`.
