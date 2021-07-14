@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.2] - 2021-07-14
 
+## [1.0.2] - 2021-07-14
+
 - Make sure handle are lowercase and UserGroup names are snakecase
 
 ## [1.0.1] - 2021-07-13
@@ -22,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added code for version of the Github Action. Now it takes a YAML file as input and parse to create or update Slack user groups.
 
 [Unreleased]: https://github.com/giantswarm/update-slack-info/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/giantswarm/update-slack-info/compare/v1.0.2...v1.0.2
 [1.0.2]: https://github.com/giantswarm/update-slack-info/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/giantswarm/update-slack-info/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/giantswarm/update-slack-info/releases/tag/v1.0.0
