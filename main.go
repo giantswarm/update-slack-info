@@ -83,10 +83,12 @@ func main() {
 		}
 
 		// 2. Update the members
-		_, err = api.UpdateUserGroupMembers(slackGroupId, strings.Join(memberIDs, ","))
-		if err != nil {
-			fmt.Printf("Error updating members for the Slack UserGroups: %v\n", err)
-			return
+		if len(memberIDs) > 0 {
+			_, err = api.UpdateUserGroupMembers(slackGroupId, strings.Join(memberIDs, ","))
+			if err != nil {
+				fmt.Printf("Error updating members for the Slack group %s: %v\n", group.Name, err)
+				return
+			}
 		}
 	}
 
@@ -104,7 +106,7 @@ func getListUserIDs(api *slack.Client, userList []string) []string {
 
 		userInfo, err := api.GetUserByEmail(user)
 		if err != nil {
-			fmt.Printf("Error getting users from Slack: %v\n", err)
+			fmt.Printf("Error getting user %s from Slack API: %v\n", user, err)
 			return userIDs
 		}
 		userIDs = append(userIDs, userInfo.ID)
