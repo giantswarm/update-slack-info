@@ -99,8 +99,9 @@ func getListUserIDs(api *slack.Client, userList []string) []string {
 	userIDs := []string{}
 
 	for _, user := range userList {
+
 		if cachedID, ok := userCache[user]; ok {
-			userCache[user] = cachedID
+			userIDs = append(userIDs, cachedID)
 			continue
 		}
 
