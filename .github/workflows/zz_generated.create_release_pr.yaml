@@ -64,12 +64,12 @@ jobs:
       architect_flags: "--organisation ${{ github.repository_owner }} --project ${{ github.event.repository.name }}"
     steps:
       - name: Install architect
-        uses: giantswarm/install-binary-action@v1.0.0
+        uses: giantswarm/install-binary-action@v1.1.0
         with:
           binary: "architect"
           version: "3.4.0"
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3.1.0
       - name: Prepare release changes
         run: |
           architect prepare-release ${{ env.architect_flags }} --version "${{ needs.gather_facts.outputs.version }}"
