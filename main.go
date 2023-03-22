@@ -25,9 +25,14 @@ type UserGroups struct {
 }
 
 func main() {
+	var filepath string
 	userCache = map[string]string{}
 
-	filepath := os.Getenv(EnvFilepath)
+	if len(os.Args) > 1 {
+		filepath = os.Args[1]
+	} else {
+		filepath = os.Getenv(EnvFilepath)
+	}
 	if filepath == "" {
 		fmt.Fprintln(os.Stderr, "File path is required")
 		os.Exit(1)
@@ -71,7 +76,7 @@ func main() {
 
 		if slackGroupId == "" {
 			ug := slack.UserGroup{
-				Name:   "App Squad " + strings.Title(strings.ToLower(group.Name)),
+				Name:   "Team " + strings.Title(strings.ToLower(group.Name)),
 				Handle: strings.ToLower(group.Name),
 			}
 			ugr, err := api.CreateUserGroup(ug)
@@ -84,7 +89,10 @@ func main() {
 
 		// 2. Update the members
 		if len(memberIDs) > 0 {
-			_, err = api.UpdateUserGroupMembers(slackGroupId, strings.Join(memberIDs, ","))
+			mlist := strings.Join(memberIDs, ",")
+
+			fmt.Printf("Updating Slack UserGroup %v with members: %s\n", group.Name, mlist)
+			_, err = api.UpdateUserGroupMembers(slackGroupId, mlist)
 			if err != nil {
 				fmt.Printf("Error updating members for the Slack group %s: %v\n", group.Name, err)
 				return
@@ -92,7 +100,7 @@ func main() {
 		}
 	}
 
-	fmt.Println(`::set-output name=output::"Slack has been updated successfully"`)
+	fmt.Println("Slack has been updated successfully")
 }
 
 func getListUserIDs(api *slack.Client, userList []string) []string {
@@ -108,7 +116,7 @@ func getListUserIDs(api *slack.Client, userList []string) []string {
 		userInfo, err := api.GetUserByEmail(user)
 		if err != nil {
 			fmt.Printf("Error getting user %s from Slack API: %v\n", user, err)
-			return userIDs
+			continue
 		}
 		userIDs = append(userIDs, userInfo.ID)
 		userCache[user] = userInfo.ID

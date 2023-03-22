@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.3] - 2021-07-23
 
 - Fix a bug in cached users
+- Fix a but when Slack user does not exist anymore
 
 ## [1.0.2] - 2021-07-14
 
