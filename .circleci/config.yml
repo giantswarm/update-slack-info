@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  architect: giantswarm/architect@3.2.0
+  architect: giantswarm/architect@4.35.5
 
 workflows:
   build:
@@ -13,15 +13,11 @@ workflows:
             tags:
               only: /^v.*/
 
-      - architect/push-to-docker:
-          name: push-update-slack-info-to-quay
-          image: "quay.io/giantswarm/update-slack-info"
+      - architect/push-to-registries:
           context: architect
-          username_envar: "QUAY_USERNAME"
-          password_envar: "QUAY_PASSWORD"
+          name: push-to-registries
           requires:
             - go-build
-          # Needed to trigger job also on git tag.
           filters:
             tags:
               only: /^v.*/
