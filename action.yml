@@ -1,16 +1,16 @@
-name: 'Update Slack Info'
-description: 'This action will update Slack Information like groups or users'
-author: 'pipo02mix'
+name: Update Slack Info
+description: Updates Slack information like groups or users
+author: pipo02mix
 runs:
-  using: 'docker'
-  image: 'docker://quay.io/giantswarm/update-slack-info:1.0.2'
+  using: docker
+  image: docker://quay.io/giantswarm/update-slack-info:1.0.2
   args:
     - ${{ inputs.filepath }}
 branding:
-  icon: 'bell'
-  color: 'yellow'
+  icon: bell
+  color: yellow
 inputs:
   filepath:
-    description: 'Filepath to apply'
+    description: Filepath to apply
     required: false
-    default: './squads.yaml'
+    default: ./squads.yaml
