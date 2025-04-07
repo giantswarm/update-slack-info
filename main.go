@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/slack-go/slack"
@@ -25,15 +25,15 @@ type UserGroups struct {
 }
 
 func main() {
-	var filepath string
+	var filePath string
 	userCache = map[string]string{}
 
 	if len(os.Args) > 1 {
-		filepath = os.Args[1]
+		filePath = os.Args[1]
 	} else {
-		filepath = os.Getenv(EnvFilepath)
+		filePath = os.Getenv(EnvFilepath)
 	}
-	if filepath == "" {
+	if filePath == "" {
 		fmt.Fprintln(os.Stderr, "File path is required")
 		os.Exit(1)
 	}
@@ -44,7 +44,8 @@ func main() {
 		os.Exit(1)
 	}
 
-	yamlFile, err := ioutil.ReadFile(filepath)
+	filePath = filepath.Clean(filePath)
+	yamlFile, err := os.ReadFile(filePath)
 	if err != nil {
 		fmt.Printf("Error opening the file: #%v ", err)
 	}
